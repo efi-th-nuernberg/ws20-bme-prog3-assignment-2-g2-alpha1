@@ -21,7 +21,6 @@ class TextFormatter {
 
   // Ausgabe
   public void print(String aText) {
-
    String formattedString = "";
     int previousLineStart = 0;
     for (int currentPosition = 0; currentPosition < aText.length(); currentPosition++){
@@ -40,9 +39,6 @@ class TextFormatter {
         formattedString +=  aText.substring(previousLineStart, blankPosition);
         previousLineStart = blankPosition;
       }
-    
-      
-      
     }
     formattedString += "\n" + aText.substring(previousLineStart +1, aText.length());
     System.out.println(formattedString);
