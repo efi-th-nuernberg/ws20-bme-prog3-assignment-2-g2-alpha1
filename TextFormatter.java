@@ -21,18 +21,30 @@ class TextFormatter {
 
   // Ausgabe
   public void print(String aText) {
-   String formattedString = "";
 
+   String formattedString = "";
+    int previousLineStart = 0;
     for (int currentPosition = 0; currentPosition < aText.length(); currentPosition++){
-      if (currentPosition % 30 == 0){
-        if(aText.charAt(currentPosition) != ' '){
-          formattedString += "-";
+      if (currentPosition-previousLineStart > 30){
+        int blankPosition = currentPosition;
+        while ((aText.charAt(blankPosition) != ' ') && blankPosition > previousLineStart){
+           blankPosition = blankPosition-1;
         }
-        formattedString += "\n";
+        if(blankPosition <= previousLineStart){
+          blankPosition = currentPosition;
+        }
+        if(previousLineStart > 0){
+          formattedString += "\n" ;
+          previousLineStart +=1;
+        }
+        formattedString +=  aText.substring(previousLineStart, blankPosition);
+        previousLineStart = blankPosition;
       }
-      formattedString += aText.charAt(currentPosition);
+    
+      
       
     }
+    formattedString += "\n" + aText.substring(previousLineStart +1, aText.length());
     System.out.println(formattedString);
   }
 
