@@ -12,6 +12,8 @@ class TextFormatter {
   public static void main(String[] args) {
     TextFormatter formatter = new TextFormatter(30);
     formatter.print(text);
+    formatter.print(" ");
+    formatter.printRechts(text);
   }
 
   // Konstruktor
@@ -20,14 +22,14 @@ class TextFormatter {
   }
 
   // Ausgabe
-  public void print(String aText) {
+  public void printRechts(String aText) {
    String formattedString = "";
     int previousLineStart = 0;
     for (int currentPosition = 0; currentPosition < aText.length(); currentPosition++){
       if (currentPosition-previousLineStart > 30){
         int blankPosition = currentPosition;
         while ((aText.charAt(blankPosition) != ' ') && blankPosition > previousLineStart){
-           blankPosition = blankPosition-1;
+           blankPosition = blankPosition-1; 
         }
         if(blankPosition <= previousLineStart){
           blankPosition = currentPosition;
@@ -43,5 +45,29 @@ class TextFormatter {
     formattedString += "\n" + aText.substring(previousLineStart +1, aText.length());
     System.out.println(formattedString);
   }
+  public void print(String aText) {
+   String formattedString = "";
+    int previousLineStart = 0;
+    for (int currentPosition = 0; currentPosition < aText.length(); currentPosition++){
+      if (currentPosition-previousLineStart > 30){
+        int blankPosition = currentPosition;
+        while ((aText.charAt(blankPosition) != ' ') && blankPosition > previousLineStart){
+           blankPosition = blankPosition-1; 
+        }
+        if(blankPosition <= previousLineStart){
+          blankPosition = currentPosition;
+        }
+        if(previousLineStart > 0){
+          formattedString += "\n" ;
+          previousLineStart +=1;
+        }
+        formattedString +=  aText.substring(previousLineStart, blankPosition);
+        previousLineStart = blankPosition;
+      }
+    }
+    formattedString += "\n" + aText.substring(previousLineStart +1, aText.length());
+    System.out.println(formattedString);
+  }
+
 
 }
